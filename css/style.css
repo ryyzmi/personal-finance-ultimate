@@ -45,20 +45,30 @@ input:focus,select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #a78bfa
 .app-footer{text-align:center;color:#685d7a;font-size:10px;letter-spacing:1px;padding:20px}.app-footer span{color:var(--purple);padding:0 5px}
 .toast{position:fixed;right:24px;bottom:24px;background:#30234a;border:1px solid #5a477a;color:#fff;padding:13px 17px;border-radius:11px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s;z-index:20}.toast.show{opacity:1;transform:translateY(0)}
 @media(max-width:900px){.sidebar{width:205px}.main-content{margin-left:205px;width:calc(100% - 205px);padding:25px 22px}.summary-card h2{font-size:20px}}
-  .brand-logo {
+
+/* BRAND LOGO FIX */
+.brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: fit-content;
+  margin: 0 0 42px 10px;
+  text-decoration: none;
 }
 
-.brand-logo img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
+.brand-logo {
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px;
+  flex-shrink: 0;
 }
 
-.brand-logo span {
-  font-size: 14px;
-  font-weight: 700;
+.brand > span {
   color: #c4a5ff;
-}         
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
