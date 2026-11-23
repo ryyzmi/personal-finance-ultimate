@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100b20">
+  <meta name="description" content="Personal Finance - pencatat keuangan pribadi sederhana.">
+  <title>PERSONAL FINANCE — Ultimate</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Personal Finance">PF<span>.</span></a>
+      <div class="sidebar-label">MENU UTAMA</div>
+      <nav id="main-nav">
+        <button class="nav-item active" data-page="dashboard"><span>◫</span> Dashboard</button>
+        <button class="nav-item" data-page="transactions"><span>⇄</span> Transaksi</button>
+        <button class="nav-item" data-page="goals"><span>◎</span> Target Keuangan</button>
+        <button class="nav-item" data-page="budget"><span>▤</span> Anggaran</button>
+        <button class="nav-item" data-page="analytics"><span>▥</span> Analitik</button>
+        <button class="nav-item" data-page="wallets"><span>▣</span> Dompet</button>
+        <button class="nav-item" data-page="settings"><span>⚙</span> Pengaturan</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="status-dot"></div>
+        <span>Data tersimpan di perangkat</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PERSONAL FINANCE</p>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar" id="avatar-initial">P</div>
+          <span id="profile-name">Pengguna</span>
+        </div>
+      </header>
+
+      <section class="page-section active" id="dashboard-page">
+        <div class="welcome-panel">
+          <div>
+            <p class="muted">Selamat datang kembali,</p>
+            <h2 id="welcome-name">Pengguna 👋</h2>
+            <p class="muted">Atur uangmu, pahami kebiasaanmu, capai targetmu.</p>
+          </div>
+          <div class="welcome-mark">PF<span>.</span></div>
+        </div>
+
+        <div class="summary-grid">
+          <article class="summary-card balance-card">
+            <div class="card-top"><span>Total Saldo</span><span class="card-icon">◈</span></div>
+            <h2 id="total-balance">Rp0</h2>
+            <small>Akumulasi pemasukan dikurangi pengeluaran</small>
+          </article>
+          <article class="summary-card">
+            <div class="card-top"><span>Total Pemasukan</span><span class="card-icon income-icon">↗</span></div>
+            <h2 id="total-income">Rp0</h2>
+            <small>Semua transaksi pemasukan</small>
+          </article>
+          <article class="summary-card">
+            <div class="card-top"><span>Total Pengeluaran</span><span class="card-icon expense-icon">↘</span></div>
+            <h2 id="total-expense">Rp0</h2>
+            <small>Semua transaksi pengeluaran</small>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">RINGKASAN</p><h3>Arus kas bulan ini</h3></div><span class="month-chip" id="dashboard-month"></span></div>
+            <div class="cashflow-row"><span>Pemasukan</span><strong class="positive" id="month-income">Rp0</strong></div>
+            <div class="cashflow-row"><span>Pengeluaran</span><strong class="negative" id="month-expense">Rp0</strong></div>
+            <div class="cashflow-row total-row"><span>Selisih</span><strong id="month-net">Rp0</strong></div>
+          </article>
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">TARGET</p><h3>Target keuangan</h3></div><button class="text-button" data-goto="goals">Lihat semua</button></div>
+            <div id="dashboard-goals" class="mini-list"><p class="empty-state">Belum ada target.</p></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="section-heading"><div><p class="eyebrow">AKTIVITAS</p><h3>Transaksi terbaru</h3></div><button class="text-button" data-goto="transactions">Lihat semua</button></div>
+          <div id="dashboard-recent" class="table-wrap"></div>
+        </article>
+      </section>
+
+      <section class="page-section" id="transactions-page" hidden>
+        <div class="page-intro"><div><p class="eyebrow">CATAT UANG MASUK DAN KELUAR</p><h2>Transaksi</h2><p class="muted">Simpan setiap pemasukan dan pengeluaranmu.</p></div></div>
+        <div class="two-column">
+          <article class="panel">
+            <h3>Tambah transaksi</h3>
+            <form id="transaction-form" class="form-grid">
+              <label>Jenis transaksi<select id="transaction-type"><option value="expense">Pengeluaran</option><option value="income">Pemasukan</option></select></label>
+              <label>Nominal (Rp)<input id="transaction-amount" type="number" min="1" step="1" placeholder="Contoh: 25000" required></label>
+              <label>Kategori<select id="transaction-category" required></select></label>
+              <label>Dompet<select id="transaction-wallet" required></select></label>
+              <label>Tanggal<input id="transaction-date" type="date" required></label>
+              <label class="full-width">Catatan (opsional)<input id="transaction-note" type="text" maxlength="100" placeholder="Contoh: makan siang"></label>
+              <button class="primary-button full-width" type="submit">Simpan transaksi</button>
+            </form>
+          </article>
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">FILTER</p><h3>Temukan transaksi</h3></div></div>
+            <label class="search-label">Cari catatan atau kategori<input id="transaction-search" type="search" placeholder="Ketik kata kunci..."></label>
+            <label class="search-label">Jenis<select id="transaction-filter"><option value="all">Semua</option><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></label>
+            <label class="search-label">Bulan<input id="transaction-month-filter" type="month"></label>
+            <button class="secondary-button" id="clear-transaction-filter" type="button">Hapus filter</button>
+          </article>
+        </div>
+        <article class="panel"><div class="section-heading"><div><p class="eyebrow">RIWAYAT</p><h3>Semua transaksi</h3></div><span class="count-chip" id="transaction-count">0 transaksi</span></div><div id="transaction-list" class="table-wrap"></div></article>
+      </section>
+
+      <section class="page-section" id="goals-page" hidden>
+        <div class="page-intro"><div><p class="eyebrow">RENCANAKAN MASA DEPAN</p><h2>Target keuangan</h2><p class="muted">Buat tujuan tabungan dan pantau perkembangannya.</p></div></div>
+        <div class="two-column">
+          <article class="panel"><h3>Buat target baru</h3>
+            <form id="goal-form" class="form-grid">
+              <label>Nama target<input id="goal-name" type="text" maxlength="50" placeholder="Contoh: Laptop" required></label>
+              <label>Nominal target (Rp)<input id="goal-target" type="number" min="1" required></label>
+              <label>Tabungan awal (Rp)<input id="goal-saved" type="number" min="0" value="0"></label>
+              <label>Deadline (opsional)<input id="goal-deadline" type="date"></label>
+              <label class="full-width">Deskripsi (opsional)<input id="goal-description" type="text" maxlength="120" placeholder="Catatan tentang target ini"></label>
+              <button class="primary-button full-width" type="submit">Buat target</button>
+            </form>
+          </article>
+          <article class="panel"><h3>Tambah tabungan ke target</h3>
+            <form id="goal-fund-form" class="form-grid">
+              <label class="full-width">Pilih target<select id="goal-fund-select" required></select></label>
+              <label class="full-width">Nominal tambahan (Rp)<input id="goal-fund-amount" type="number" min="1" required></label>
+              <button class="secondary-button full-width" type="submit">Tambah tabungan</button>
+            </form>
+            <p class="hint">Penambahan tabungan target hanya memperbarui progres target, tidak membuat transaksi pengeluaran.</p>
+          </article>
+        </div>
+        <div id="goals-list" class="cards-grid"></div>
+      </section>
+
+      <section class="page-section" id="budget-page" hidden>
+        <div class="page-intro"><div><p class="eyebrow">KENDALIKAN PENGELUARAN</p><h2>Anggaran bulanan</h2><p class="muted">Tetapkan batas pengeluaran untuk setiap kategori.</p></div></div>
+        <article class="panel"><h3>Buat atau ubah anggaran</h3>
+          <form id="budget-form" class="form-grid budget-form">
+            <label>Kategori pengeluaran<select id="budget-category" required></select></label>
+            <label>Batas anggaran (Rp)<input id="budget-amount" type="number" min="1" required placeholder="Contoh: 500000"></label>
+            <label>Bulan<input id="budget-month" type="month" required></label>
+            <button class="primary-button" type="submit">Simpan anggaran</button>
+          </form>
+        </article>
+        <div id="budget-list" class="cards-grid"></div>
+      </section>
+
+      <section class="page-section" id="analytics-page" hidden>
+        <div class="page-intro"><div><p class="eyebrow">PAHAMI POLA KEUANGAN</p><h2>Analitik</h2><p class="muted">Ringkasan berdasarkan transaksi yang kamu catat.</p></div></div>
+        <article class="panel"><div class="section-heading"><h3>Arus kas 6 bulan terakhir</h3><span class="hint">Dalam Rupiah</span></div><div id="analytics-chart" class="chart-area"></div></article>
+        <div class="two-column">
+          <article class="panel"><h3>Pengeluaran per kategori</h3><div id="category-analytics"></div></article>
+          <article class="panel"><h3>Ringkasan keseluruhan</h3><div id="analytics-summary"></div></article>
+        </div>
+      </section>
+
+      <section class="page-section" id="wallets-page" hidden>
+        <div class="page-intro"><div><p class="eyebrow">TEMPAT MENYIMPAN UANG</p><h2>Dompet</h2><p class="muted">Saldo dompet dihitung dari transaksi yang kamu masukkan.</p></div></div>
+        <div class="two-column">
+          <article class="panel"><h3>Tambah dompet</h3><form id="wallet-form" class="form-grid"><label class="full-width">Nama dompet<input id="wallet-name" maxlength="30" placeholder="Contoh: Tabungan Bank" required></label><button class="primary-button full-width" type="submit">Tambah dompet</button></form></article>
+          <article class="panel"><h3>Catatan</h3><p class="muted">Untuk memindahkan uang antar-dompet, catat pengeluaran dari dompet asal dan pemasukan pada dompet tujuan. Total saldo keseluruhan tidak berubah jika nominalnya sama.</p></article>
+        </div>
+        <div id="wallet-list" class="cards-grid"></div>
+      </section>
+
+      <section class="page-section" id="settings-page" hidden>
+        <div class="page-intro"><div><p class="eyebrow">ATUR APLIKASI</p><h2>Pengaturan</h2><p class="muted">Kelola profil, kategori, dan salinan data.</p></div></div>
+        <div class="two-column">
+          <article class="panel"><h3>Profil pengguna</h3><form id="profile-form" class="form-grid"><label class="full-width">Nama panggilan<input id="profile-input" maxlength="30" placeholder="Nama panggilan" required></label><button class="primary-button full-width" type="submit">Simpan nama</button></form><p class="hint">Foto profil tidak digunakan. Profil hanya memakai nama panggilan.</p></article>
+          <article class="panel"><h3>Tampilan</h3><p class="muted">Tema saat ini: Dark Purple</p><p class="hint">Versi ini menggunakan tampilan gelap sebagai tema utama.</p></article>
+        </div>
+        <article class="panel"><h3>Tambah kategori kustom</h3><form id="category-form" class="form-grid"><label>Jenis<select id="category-type"><option value="expense">Pengeluaran</option><option value="income">Pemasukan</option></select></label><label>Nama kategori<input id="category-name" maxlength="30" placeholder="Contoh: Freelance" required></label><label>Emoji<input id="category-emoji" maxlength="4" placeholder="Contoh: 💻"></label><button class="primary-button" type="submit">Tambah kategori</button></form><div id="category-list" class="category-list"></div></article>
+        <article class="panel"><h3>Backup dan pemulihan</h3><p class="muted">Ekspor backup secara berkala agar data bisa dipindahkan atau dipulihkan.</p><div class="button-row"><button class="primary-button" id="export-data" type="button">Ekspor backup JSON</button><label class="file-button">Impor backup JSON<input id="import-data" type="file" accept=".json,application/json" hidden></label></div><button class="danger-button" id="reset-data" type="button">Hapus semua data lokal</button></article>
+        <article class="panel"><h3>Tentang penyimpanan</h3><p class="hint">Data disimpan di browser/perangkat ini. GitHub Pages hanya menyajikan file website dan tidak menyinkronkan data antarperangkat. Jangan hapus data browser sebelum membuat backup.</p></article>
+      </section>
+
+      <footer class="app-footer">PERSONAL FINANCE <span>•</span> ULTIMATE EDITION <span>•</span> Local-first</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
