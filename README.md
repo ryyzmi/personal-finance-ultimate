@@ -42,3 +42,4 @@ Website pencatat keuangan pribadi berbasis HTML, CSS, dan JavaScript. Bisa di-ho
 - Google Fonts hanya digunakan sebagai peningkatan tampilan; jika tidak tersedia, font cadangan tetap digunakan.
 - Saldo dompet dihitung dari transaksi yang terkait dengan dompet tersebut.
 - Menambah tabungan pada target hanya memperbarui progres target, bukan transaksi kas.
+Website Personal Financ
